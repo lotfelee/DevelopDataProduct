@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Studying the effect of Manual gear vs Automatic transmission on fuel consumbtion</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Studying the effect of Manual gear vs Automatic transmission on fuel consumbtion">
+  <meta name="author" content="">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Studying the effect of Manual gear vs Automatic transmission on fuel consumbtion</h1>
+    <h2></h2>
+    <p><br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Summary:</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Motor Trend, a magazine about the automobile industry. Looking at a data set of a collection of cars, they are interested in exploring the relationship between a set of variables and miles per gallon (MPG) (outcome). They are particularly interested in the following two questions:</p>
+
+<p>1 . Is an automatic or manual transmission better for MPG</p>
+
+<p>2 . Quantify the MPG difference between automatic and manual transmissions</p>
+
+<p>My strategy as below:</p>
+
+<ul>
+<li>Regress mpg to am only .</li>
+<li>Regress mpg to all another variables .</li>
+<li>Regress mpg to the most correlated variables with mpg .</li>
+</ul>
+
+<p>Finally choosing the best model using root mean square error of the models to answer the latter questions .</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h3>* Finding the most influence variables to mpg ,using correlation and correlation map :</h3>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>##   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb 
+##  1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h3>Is an automatic or manual transmission better for MPG</h3>
+  </hgroup>
+  <article data-timings="">
+    <p>When i regress the mpg to all the another variables i got an &quot;am&quot; Coefficient value of 2.52 , When i regress the mpg to &quot;am&quot; only i got an &quot;am&quot; Coefficient value of 7.24 , when i regress the mpg to only the highly correlated variables with mpg meaning(cyl+disp+hp+wt+carb+am) i got 1.9 .
+bottom line in the three cases it is above zero meaning when am=1 (manual gear) on average will always get an increase in mpg ,Manual  is better for mpg ,and the below box plot also support this deduction.</p>
+
+<p><img src="assets/fig/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h3>Quantify the MPG difference between automatic and manual transmissions</h3>
+  </hgroup>
+  <article data-timings="">
+    <p>to answer this i have to choose a model between my three last models to do so i calcualated the root mean square error for the three model and i chose the model with the lower rmse:</p>
+
+<p>RMS for model1 is 2.15 ,RMS for model2 is 4.75 and RMS for model3 is 2.25 So based on RMS values for the three models i chose model1 where i regress mpg to all another variables .</p>
+
+<h4>creating 95% Confidence intervals for unit change of mpg with change of gear type</h4>
+
+<pre><code>## [1] -1.76  6.80
+</code></pre>
+
+<p>The latter is telling us that when we go for 95% Confidence intervals change between manual and automatic gear the miles per gallon will be change within (-1.7 and 6.8 mpg) ,that mean in some case manual may be worse! </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Summary:'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='* Finding the most influence variables to mpg ,using correlation and correlation map :'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Is an automatic or manual transmission better for MPG'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Quantify the MPG difference between automatic and manual transmissions'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
